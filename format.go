@@ -11,11 +11,9 @@ var Padding = true
 
 // Raw formatting for lumber log
 func format(stat status, t time.Time, message string) string {
-	out := fmt.Sprintf(`%v | %v
-%v
-`,
+	out := fmt.Sprintf("%v | %v\n%v\n",
 		applyColor(stat, string(stat)),
-		t.Format("Mon Jan 2 15:04:05 MST 2006"),
+		t.Format(time.UnixDate),
 		message)
 
 	if !Padding {
@@ -27,9 +25,5 @@ func format(stat status, t time.Time, message string) string {
 
 // Join all the items in an interface together with spaces
 func separateWithSpaces(items ...interface{}) string {
-	var joined string
-	for _, item := range items {
-		joined = fmt.Sprintf("%v %v", joined, item)
-	}
-	return strings.TrimPrefix(joined, " ")
+	return strings.Join(items, " ")
 }
